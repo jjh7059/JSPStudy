@@ -1,7 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- 클라이언트에게 회원정보를 입력받기 위한 JSP 문서 - 자바스크립트를 이용하여 입력값 검증 --%>
-<%-- => [회원가입]을 클릭한 경우 회원 가입 처리페이지(member_join_action.jsp)로 이동 - 입력값 전달 --%>    
+<%-- => [회원가입]을 클릭한 경우 회원 가입 처리페이지(member_join_action.jsp)로 이동 - 입력값 전달 --%>
+<%-- => [중복검사]를 클릭한 경우 새창에 아이디 중복 검사페이지(id)check.jsp)로 이동 --%>
+<%-- => [우편번호 검색]을 ㅡㅋㄹ릭한 경우 새창에 우편번호 검사페이지(post_search.jsp)로 이동 --%>    
 <style type="text/css">
 fieldset {
 	text-align: left;
@@ -46,7 +48,7 @@ legend {
 }
 
 #idCheck:hover, #postSearch:hover {
-	background: aqua;
+	background: skyblue;
 }
 </style>
 <form name="joinForm" id="join" method="post"
@@ -105,12 +107,13 @@ legend {
 		</li>
 		<li>
 			<label>우편번호</label>
-			<input type="text" name="zipcode" id="zipcode" size="7">
+			<input type="text" name="zipcode" id="zipcode" size="7" readonly="readonly">
+			<span id="postSearch">우편번호 검색</span>
 			<div id="zipcodeMsg" class="error">우편번호를 입력해 주세요.</div>
 		</li>
 		<li>
 			<label for="address1">기본주소</label>
-			<input type="text" name="address1" id="address1" size="50">
+			<input type="text" name="address1" id="address1" size="50" readonly="readonly">
 			<div id="address1Msg" class="error">기본주소를 입력해 주세요.</div>
 		</li>
 		<li>
@@ -226,6 +229,11 @@ $("#id").change(function() {
 	if($("#idCheckResult").val()=="1") {
 		$("#idCheckResult").val("0");//아이디 중복검사 상태를 미실행으로 변경
 	}
+});
+
+$("#postSearch").click(function() {
+	window.open("<%=request.getContextPath()%>/site/member/post_search.jsp"
+			,"postSearch","width=550,height=600,left=600,top=250");
 });
 </script>
 
