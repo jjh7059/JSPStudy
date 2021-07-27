@@ -13,6 +13,11 @@
 	String work=request.getParameter("work");
 	if(work==null) work="product_list";
 	
+	String headerPath = "header.jsp";
+	if(workgroup.equals("admin")) {
+		headerPath = "admin/header.jsp";
+	}
+	
 	String contentPath=workgroup+"/"+work+".jsp";
 %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,7 +31,8 @@
 <body>
 	<%-- Header 영역 : 회사로고,메뉴 등 --%>
 	<div id="header">
-		<jsp:include page="header.jsp"/>
+		<%-- <jsp:include page="header.jsp"/> --%>
+		<jsp:include page="<%=headerPath %>"/>
 	</div>
 	
 	<%-- Content 영역 : 요청에 대한 결과 출력 --%>

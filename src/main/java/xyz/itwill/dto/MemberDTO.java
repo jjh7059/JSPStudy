@@ -14,7 +14,7 @@ ADDRESS2            VARCHAR2(50)  - 상세주소
 JOIN_DATE           DATE          - 회원가입날짜
 LAST_LOGIN          DATE          - 마지막 로그인 날짜
 STATUS              NUMBER(1)     - 회원상태 : 1(일반회원), 9(관리자)
- */
+*/
 
 public class MemberDTO {
 	private String id;
