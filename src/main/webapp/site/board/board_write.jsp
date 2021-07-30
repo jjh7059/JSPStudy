@@ -62,7 +62,7 @@ td {
 				<textarea rows="7" cols="60" name="content" id="board_content"></textarea>
 			</td>
 		</tr>
-		<tr>
+		<tr> 
 			<th colspan="2">
 				<button type="submit">글저장</button>
 				<button type="reset" id="resetBtn">다시쓰기</button>

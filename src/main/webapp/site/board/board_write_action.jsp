@@ -21,12 +21,12 @@
 	int ref = Integer.parseInt(request.getParameter("ref"));
 	int reStep = Integer.parseInt(request.getParameter("reStep"));
 	int reLevel = Integer.parseInt(request.getParameter("reLevel"));
-	String pageNum = request.getParameter("pageNum");
+	String pageNum = request.getParameter("pageNum");//(새글 : 1, 답글 : 부모글의 전달값)
 	//전달값에서 태그관련 기호를 회피(Escape)문자로 변환하여 저장 - XSS 공격에 대비
 	String subject = Utility.escapeTag(request.getParameter("subject"));
 	int status = 0;//전달값이 없는 경우 : 일반글 - 0(초기값)
 	if(request.getParameter("secret") != null) {//전달값이 있는 경우 : 비밀글 - 1
-		status = Integer.parseInt("secret");
+		status = Integer.parseInt(request.getParameter("secret"));
 	}
 	String content = Utility.escapeTag(request.getParameter("content"));
 	
@@ -77,8 +77,11 @@
 	board.setIp(ip);//클라이언트 IP 주소
 	board.setStatus(status);//사용자 입력 전달값(상태 : 일반글 또는 비밀글)
 	
-	//게시글을 전달받아 BOARD 테이블에 저장하고 저장하는 DAO 클래스의 메소드 호출
+	//게시글을 전달받아 BOARD 테이블에 저장하는 DAO 클래스의 메소드 호출
+	BoardDAO.getDAO().insertBoard(board);
 	
-	
-	//페이지 이동
+	//페이지 이동 - 페이지 번호 전달(새글 : 1, 답글 : 부모글의 전달값)
+	out.println("<script type='text/javascript'>");
+	out.println("location.href='"+ request.getContextPath() +"/site/index.jsp?workgroup=board&work=board_list&pageNum=" + pageNum + "';");
+	out.println("</script>");
 %>
